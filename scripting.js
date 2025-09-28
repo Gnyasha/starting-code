@@ -1,5 +1,8 @@
 // Simple JavaScript for interactive components
 document.addEventListener("DOMContentLoaded", function () {
+  // Initialize navigation - show only home section by default
+  initializeNavigation();
+  
   // Update slider values
   const sliders = document.querySelectorAll(".slider");
   sliders.forEach((slider) => {
@@ -21,6 +24,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
+
+// Initialize navigation state
+function initializeNavigation() {
+  // Hide all sections initially
+  document.querySelectorAll(".section").forEach((section) => {
+    section.style.display = "none";
+  });
+  
+  // Show only the home section
+  const homeSection = document.getElementById('home-section');
+  if (homeSection) {
+    homeSection.style.display = 'block';
+  }
+}
 
 // Accordion functionality
 function toggleAccordion(element) {
@@ -226,6 +243,45 @@ function setActiveNav(item) {
     navItem.classList.remove("active");
   });
   item.classList.add("active");
+  
+  // Hide all sections first
+  document.querySelectorAll(".section").forEach((section) => {
+    section.style.display = "none";
+  });
+  
+  // Show sections based on navigation item clicked
+  const navText = item.textContent.trim().toLowerCase();
+  
+  switch(navText) {
+    case 'home':
+      document.getElementById('home-section').style.display = 'block';
+      break;
+    case 'components':
+      // Show all component sections for Components tab
+      document.getElementById('cards-section').style.display = 'block';
+      document.getElementById('chips-section').style.display = 'block';
+      document.getElementById('sliders-section').style.display = 'block';
+      document.getElementById('lists-section').style.display = 'block';
+      break;
+    case 'buttons':
+      document.getElementById('buttons-section').style.display = 'block';
+      break;
+    case 'forms':
+      document.getElementById('forms-section').style.display = 'block';
+      break;
+    case 'about':
+      // Show all sections for About (or you can create a specific about section)
+      document.querySelectorAll(".section").forEach((section) => {
+        section.style.display = "block";
+      });
+      break;
+    default:
+      // Show all sections if no specific case matches
+      document.querySelectorAll(".section").forEach((section) => {
+        section.style.display = "block";
+      });
+  }
+  
   showToast(`Navigating to ${item.textContent}`, "info");
 }
 
