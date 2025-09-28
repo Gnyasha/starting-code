@@ -29,41 +29,59 @@
           <button class="panel-close" onclick="togglePanel()">&times;</button>
         </div>
         <div class="form-group">
-          <label class="form-label">Primary Color</label>
-          <div>
-            <span
-              class="color-option"
-              style="background-color: #4361ee"
-              onclick="changeColor('primary', '#4361ee')"
-            ></span>
-            <span
-              class="color-option"
-              style="background-color: #e63946"
-              onclick="changeColor('primary', '#e63946')"
-            ></span>
-            <span
-              class="color-option"
-              style="background-color: #2a9d8f"
-              onclick="changeColor('primary', '#2a9d8f')"
-            ></span>
-            <span
-              class="color-option"
-              style="background-color: #f4a261"
-              onclick="changeColor('primary', '#f4a261')"
-            ></span>
+          <label class="form-label">Theme Preview</label>
+          <div class="theme-preview-grid">
+            <div class="theme-preview" onclick="changeTheme('complementary')" data-theme="complementary">
+              <div class="preview-colors">
+                <span style="background: #000066"></span>
+                <span style="background: #001247"></span>
+                <span style="background: #bfcfff"></span>
+                <span style="background: #663d00"></span>
+              </div>
+              <span class="preview-label">Complementary</span>
+            </div>
+            <div class="theme-preview" onclick="changeTheme('triad')" data-theme="triad">
+              <div class="preview-colors">
+                <span style="background: #663d00"></span>
+                <span style="background: #004700"></span>
+                <span style="background: #440066"></span>
+                <span style="background: #300047"></span>
+              </div>
+              <span class="preview-label">Triad</span>
+            </div>
+            <div class="theme-preview" onclick="changeTheme('modern')" data-theme="modern">
+              <div class="preview-colors">
+                <span style="background: #280066"></span>
+                <span style="background: #1c0047"></span>
+                <span style="background: #d8bfff"></span>
+                <span style="background: #b280ff"></span>
+              </div>
+              <span class="preview-label">Modern</span>
+            </div>
+            <div class="theme-preview" onclick="changeTheme('tetradic')" data-theme="tetradic">
+              <div class="preview-colors">
+                <span style="background: #410f70"></span>
+                <span style="background: #705d0f"></span>
+                <span style="background: #4e410b"></span>
+                <span style="background: #700f6e"></span>
+              </div>
+              <span class="preview-label">Tetradic</span>
+            </div>
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Theme</label>
+          <label class="form-label">Professional Themes</label>
           <select
             class="form-select"
             id="themeSelect"
             onchange="changeTheme(this.value)"
           >
-            <option value="light">Light</option>
+            <option value="light">Default Light</option>
             <option value="dark">Dark</option>
-            <option value="blue">Blue</option>
-            <option value="green">Green</option>
+            <option value="complementary">Complementary</option>
+            <option value="triad">Triad</option>
+            <option value="modern">Modern Purple</option>
+            <option value="tetradic">Tetradic</option>
           </select>
         </div>
         <div class="form-group">

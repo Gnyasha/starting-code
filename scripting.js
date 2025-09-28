@@ -415,43 +415,88 @@ function changeColor(variable, color) {
 }
 
 function changeTheme(theme) {
-  let primary, secondary, light, dark, bodyBg, cardBg, textColor, borderColor;
+  let primary, secondary, accent, light, dark, bodyBg, cardBg, textColor, borderColor;
+
+  // Update theme previews active state
+  document.querySelectorAll('.theme-preview').forEach(preview => {
+    preview.classList.remove('active');
+  });
+  
+  const activePreview = document.querySelector(`[data-theme="${theme}"]`);
+  if (activePreview) {
+    activePreview.classList.add('active');
+  }
 
   switch (theme) {
     case "dark":
       // Dark theme colors
-      primary = "#7b68ee"; // Brighter purple for better visibility
-      secondary = "#4cc9f0"; // Bright blue for accents
-      light = "#2d3748"; // Dark gray for light elements
-      dark = "#f8f9fa"; // White for dark text
-      bodyBg = "#121212"; // Near black for body background
-      cardBg = "#1e1e1e"; // Dark gray for card backgrounds
-      textColor = "#e2e8f0"; // Light gray for text
-      borderColor = "#4a5568"; // Medium gray for borders
+      primary = "#7b68ee";
+      secondary = "#4cc9f0";
+      accent = "#e74c3c";
+      light = "#2d3748";
+      dark = "#f8f9fa";
+      bodyBg = "#121212";
+      cardBg = "#1e1e1e";
+      textColor = "#e2e8f0";
+      borderColor = "#4a5568";
       break;
-    case "blue":
-      primary = "#0077b6";
-      secondary = "#00b4d8";
-      light = "#caf0f8";
-      dark = "#03045e";
-      bodyBg = "#f5f7ff";
+      
+    case "complementary":
+      // Theme 1 - Complementary
+      primary = "#000066";
+      secondary = "#001247";
+      accent = "#663d00";
+      light = "#bfcfff";
+      dark = "#000033";
+      bodyBg = "#f0f4ff";
       cardBg = "#ffffff";
-      textColor = "#212529";
-      borderColor = "#e9ecef";
+      textColor = "#000066";
+      borderColor = "#ccddff";
       break;
-    case "green":
-      primary = "#2a9d8f";
-      secondary = "#e9c46a";
-      light = "#e9f5db";
-      dark = "#264653";
-      bodyBg = "#f5f7ff";
+      
+    case "triad":
+      // Theme 2 - Triad
+      primary = "#663d00";
+      secondary = "#004700";
+      accent = "#440066";
+      light = "#f0e6d6";
+      dark = "#300047";
+      bodyBg = "#f8f5f0";
       cardBg = "#ffffff";
-      textColor = "#212529";
-      borderColor = "#e9ecef";
+      textColor = "#333333";
+      borderColor = "#d9cfc0";
       break;
+      
+    case "modern":
+      // Theme 3 - Modern Purple
+      primary = "#280066";
+      secondary = "#1c0047";
+      accent = "#b280ff";
+      light = "#d8bfff";
+      dark = "#0f0033";
+      bodyBg = "#f5f0ff";
+      cardBg = "#ffffff";
+      textColor = "#280066";
+      borderColor = "#c9b3ff";
+      break;
+      
+    case "tetradic":
+      // Theme 4 - Tetradic
+      primary = "#410f70";
+      secondary = "#705d0f";
+      accent = "#700f6e";
+      light = "#f0e6ff";
+      dark = "#4e410b";
+      bodyBg = "#f8f5ff";
+      cardBg = "#ffffff";
+      textColor = "#410f70";
+      borderColor = "#e0d6ff";
+      break;
+      
     default: // light
       primary = "#4361ee";
       secondary = "#3a0ca3";
+      accent = "#7209b7";
       light = "#f8f9fa";
       dark = "#212529";
       bodyBg = "#f5f7ff";
@@ -463,6 +508,7 @@ function changeTheme(theme) {
   // Set all theme-related CSS variables
   document.documentElement.style.setProperty("--primary", primary);
   document.documentElement.style.setProperty("--secondary", secondary);
+  document.documentElement.style.setProperty("--accent", accent);
   document.documentElement.style.setProperty("--light", light);
   document.documentElement.style.setProperty("--dark", dark);
   document.documentElement.style.setProperty("--body-bg", bodyBg);
@@ -477,7 +523,10 @@ function changeTheme(theme) {
     document.body.classList.remove("dark-theme");
   }
 
-  showToast(`Theme changed to ${theme}`, "success");
+  // Update the select dropdown to match
+  document.getElementById("themeSelect").value = theme;
+
+  showToast(`Theme changed to ${theme.charAt(0).toUpperCase() + theme.slice(1)}`, "success");
 }
 
 function changeFontSize(size) {
@@ -501,6 +550,7 @@ function resetStyles() {
   // Reset CSS variables to default values
   document.documentElement.style.setProperty("--primary", "#4361ee");
   document.documentElement.style.setProperty("--secondary", "#3a0ca3");
+  document.documentElement.style.setProperty("--accent", "#7209b7");
   document.documentElement.style.setProperty("--light", "#f8f9fa");
   document.documentElement.style.setProperty("--dark", "#212529");
   document.documentElement.style.setProperty("--body-bg", "#f5f7ff");
@@ -516,26 +566,18 @@ function resetStyles() {
   document.getElementById("fontSize").value = "16";
   document.getElementById("fontSizeValue").textContent = "16px";
 
-  // Reset border radius to default (5px)
-  document.documentElement.style.setProperty("--border-radius", "5px");
+  // Reset border radius to default (12px)
+  document.documentElement.style.setProperty("--border-radius", "12px");
   document.getElementById("borderRadius").value = "5";
   document.getElementById("borderRadiusValue").textContent = "5px";
 
   // Reset theme selector
   document.getElementById("themeSelect").value = "light";
 
-  // Remove active state from color options
-  document.querySelectorAll(".color-option").forEach((option) => {
-    option.classList.remove("active");
+  // Remove active state from theme previews
+  document.querySelectorAll('.theme-preview').forEach(preview => {
+    preview.classList.remove('active');
   });
-
-  // Add active class to the default primary color option
-  const defaultColorOption = document.querySelector(
-    '.color-option[style*="#4361ee"]'
-  );
-  if (defaultColorOption) {
-    defaultColorOption.classList.add("active");
-  }
 
   showToast("Styles reset to default", "success");
 }
