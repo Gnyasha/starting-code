@@ -1,11 +1,18 @@
 ## ReadMe File for Lab 5
 
+
 # Web Application Development (WAD621S) Styling Lab - Lab 05
 
 ## Overview
 
 This is a hands-on styling lab where you'll write CSS to style various UI components from scratch. The HTML structure is provided, but you need to implement all the styling yourself.
+## Challenges Faced
 
+1. Understanding the Javascript code.
+2. Layout Issues
+3. Styling issues - Adding new themes too was a challenge
+4. The buttons were not working for exanding and navigating to sections
+   
 ## Learning Objectives
 
 By completing this lab, you will:
