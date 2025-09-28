@@ -559,12 +559,22 @@ function drawAnalogClock() {
   ctx.lineWidth = radius * 0.05;
   ctx.stroke();
 
-  // Draw hour markers
-  for (let i = 0; i < 12; i++) {
+    // Draw hour markers and numbers for time. TODO : use romans for hourslater
+  ctx.font = `${radius * 0.15}px Arial`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue(
+    "--dark"
+  );
+
+  for (let i = 1; i <= 12; i++) {
     const angle = (i * Math.PI) / 6;
-    ctx.beginPath();
     const innerRadius = radius * 0.8;
     const outerRadius = radius * 0.9;
+    const numberRadius = radius * 0.75;
+    
+    // Draw hour markers
+    ctx.beginPath();
     ctx.moveTo(
       radius + innerRadius * Math.sin(angle),
       radius - innerRadius * Math.cos(angle)
@@ -578,6 +588,13 @@ function drawAnalogClock() {
       document.documentElement
     ).getPropertyValue("--dark");
     ctx.stroke();
+    
+    // Draw numbers
+    ctx.fillText(
+      i.toString(),
+      radius + numberRadius * Math.sin(angle),
+      radius - numberRadius * Math.cos(angle)
+    );
   }
 
   // Draw center point
